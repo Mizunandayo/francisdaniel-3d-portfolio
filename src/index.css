@@ -1,1 +1,109 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* ─── Tailwind v4 Theme ─────────────────────────────── */
+@theme {
+  --font-sans: 'Poppins', sans-serif;
+
+  /* Brand colors */
+  --color-space:        #000010;
+  --color-moon:         #7a7a82;
+  --color-panel-bg:     #08080f;
+  --color-panel-border: #1a1a2e;
+  --color-accent:       #6366f1;
+  --color-accent-dim:   #4f52c9;
+  --color-spotify:      #1db954;
+  --color-spotify-dim:  #17a349;
+
+  /* Typography — never gray, always readable */
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #c7d2fe;
+  --color-text-muted:     #a5b4fc;
+}
+
+/* ─── Reset ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000010;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Canvas ─────────────────────────────────────────── */
+canvas {
+  display: block;
+  outline: none;
+  touch-action: none;
+}
+
+/* ─── Cursor ─────────────────────────────────────────── */
+/* UI/UX: every interactive element shows pointer — no exceptions */
+button,
+a,
+[role="button"],
+[data-clickable="true"] {
+  cursor: pointer;
+}
+
+/* ─── Scrollbar — panels only ───────────────────────── */
+.panel-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 #08080f;
+  overflow-y: auto;
+}
+
+.panel-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.panel-scroll::-webkit-scrollbar-track {
+  background: #08080f;
+}
+
+.panel-scroll::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 2px;
+}
+
+.panel-scroll::-webkit-scrollbar-thumb:hover {
+  background: #818cf8;
+}
+
+/* ─── Text selection ────────────────────────────────── */
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #ffffff;
+}
+
+/* ─── Focus ring — accessibility ────────────────────── */
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Smooth transitions global ─────────────────────── */
+button {
+  transition: opacity 0.2s ease, transform 0.15s ease, background-color 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.97);
+}

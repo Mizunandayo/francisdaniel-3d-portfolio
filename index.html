@@ -2,9 +2,65 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>francisdaniel-portfolio</title>
+
+    <!--
+      Content Security Policy — Cybersecurity Engineer perspective:
+      - script-src: only our own code + Spotify's SDK. No unsafe-inline, no unsafe-eval.
+      - style-src: unsafe-inline needed for Tailwind v4 dev mode only.
+      - connect-src: only Spotify API endpoints.
+      - img-src: allow data URIs (Three.js textures) and HTTPS (album art).
+      - worker-src: blob: needed for Three.js web workers.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self' https://sdk.scdn.co;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: blob: https:;
+        media-src 'self' blob:;
+        connect-src 'self' https://api.spotify.com https://accounts.spotify.com;
+        worker-src blob:;
+        frame-src 'none';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+      "
+    />
+
+
+    
+
+    <!-- Prevent clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Poppins — preconnect reduces font load latency -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+
+
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Francis Daniel — 3D Moon Portfolio" />
+    <meta
+      property="og:description"
+      content="An interactive 3D portfolio built on the moon surface. Walk around, explore projects, and play music."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <title>Francis Daniel — 3D Moon Portfolio</title>
   </head>
   <body>
     <div id="root"></div>

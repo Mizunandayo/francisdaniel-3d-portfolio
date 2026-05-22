@@ -19,4 +19,14 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  // Declaration files declare global types used across other files.
+  // ESLint cannot trace cross-file type usage so no-unused-vars
+  // produces false positives here — disable it for all .d.ts files.
+  {
+    files: ['**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+      'no-unused-vars': 'off',
+    },
+  },
 ])
