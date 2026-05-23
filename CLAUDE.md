@@ -228,7 +228,7 @@ Spotify Connect branding on screen — green `#1db954` logo, "Press E to connect
 - Requires **Spotify Premium** on the visitor's account
 - Redirect URI: `http://127.0.0.1:5173/callback`
 - Scopes: `streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state`
-- Tokens persisted to `localStorage` (visitor stays connected on refresh)
+- Tokens kept **in memory only** (never persisted to localStorage — XSS protection). Visitor must reconnect on refresh — this is the intentional security trade-off.
 - `VITE_SPOTIFY_CLIENT_ID` in `.env.local` (never committed)
 
 **Spotify App:** Registered at developer.spotify.com
@@ -424,9 +424,11 @@ File: `.env.local` (gitignored). Template in `.env.example`.
 - [x] .gitignore updated (.env.local, .superpowers/ excluded)
 - [x] Spotify Developer App registered (http://127.0.0.1:5173/callback)
 - [x] GitHub repo created: https://github.com/Mizunandayo/francisdaniel-3d-portfolio
-- [ ] .env.local created with VITE_SPOTIFY_CLIENT_ID
-- [ ] Spotify type declarations
-- [ ] Zustand audioStore
+- [x] .env.local created with VITE_SPOTIFY_CLIENT_ID
+- [x] Spotify type declarations (src/types/spotify.d.ts — declare global pattern)
+- [x] Zustand audioStore (bgmMuted persisted only — tokens in memory, never localStorage)
+- [x] ESLint configured for .d.ts files (no-unused-vars disabled)
+- [x] Scene camera fixed — position [0,12,35], lookAt [0,2,0], fov 75, Earth visible
 - [ ] useBackgroundMusic hook
 - [ ] useSpotify hook (PKCE + Web Playback SDK)
 - [ ] TV 3D component

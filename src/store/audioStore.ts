@@ -14,14 +14,15 @@ export interface SpotifyTrack {
   uri: string
 }
 
+// Only bgmMuted is persisted — tokens stay in memory only (XSS protection)
 interface PersistedState {
   bgmMuted: boolean
-  spotifyToken: string | null
-  spotifyRefreshToken: string | null
-  spotifyTokenExpiry: number | null
 }
 
 interface RuntimeState {
+  spotifyToken: string | null
+  spotifyRefreshToken: string | null
+  spotifyTokenExpiry: number | null
   spotifyPlayer: Spotify.Player | null
   spotifyDeviceId: string | null
   currentTrack: SpotifyTrack | null
@@ -49,16 +50,14 @@ type AudioState = PersistedState & RuntimeState & Actions
 export const useAudioStore = create<AudioState>()(
   persist(
     (set) => ({
-      // Persisted BGM state
+      // Persisted
       bgmMuted: false,
       toggleBgmMute: () => set((state) => ({ bgmMuted: !state.bgmMuted })),
 
-      // Persisted Spotify auth tokens
+      // Runtime-only — never persisted (XSS protection)
       spotifyToken: null,
       spotifyRefreshToken: null,
       spotifyTokenExpiry: null,
-
-      // Runtime-only Spotify state
       spotifyPlayer: null,
       spotifyDeviceId: null,
       currentTrack: null,
@@ -98,9 +97,6 @@ export const useAudioStore = create<AudioState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state): PersistedState => ({
         bgmMuted: state.bgmMuted,
-        spotifyToken: state.spotifyToken,
-        spotifyRefreshToken: state.spotifyRefreshToken,
-        spotifyTokenExpiry: state.spotifyTokenExpiry,
       }),
     }
   )
